@@ -177,8 +177,12 @@ class _InteractiveMoviePageState extends State<InteractiveMoviePage> {
       setState(() {
         _gameData = gameData;
         // 默认从 ID 为 "start" 的节点开始
-        if (_gameData!.nodes.containsKey('start')) {
-             _currentNode = _gameData!.nodes['start'];
+        const String startNodeId = 'story-start'; // 如果想玩要塞突袭
+
+        if (_gameData!.nodes.containsKey(startNodeId)) {
+             _currentNode = _gameData!.nodes[startNodeId];
+        } else {
+             debugPrint("错误：找不到入口节点 $startNodeId");
         }
       });
       

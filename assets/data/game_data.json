@@ -159,55 +159,11 @@
       "audioSrc": "",
       "poster": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
       "options": []
-    },
-    "start": {
-      "id": "start",
-      "title": "序章：苏醒",
-      "type": "decision",
-      "content": "你在一个冷冻舱中醒来。警报声在耳边回荡，空气中弥漫着臭氧和铁锈的味道。控制台闪烁着微弱的红光，你什么都想不起来。",
-      "mediaType": "video",
-      "mediaSrc": "https://www.runoob.com/try/demo_source/mov_bbb.mp4",
-      "audioSrc": "",
-      "poster": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=800&q=80",
-      "options": [
-        {
-          "id": "o1",
-          "label": "检查控制台",
-          "targetId": "n2"
-        },
-        {
-          "id": "o2",
-          "label": "强行打开舱门",
-          "targetId": "n3"
-        }
-      ]
-    },
-    "n2": {
-      "id": "n2",
-      "title": "系统日志",
-      "type": "scene",
-      "content": "控制台屏幕闪烁不定。上面显示着 '致命错误：船体破损'。你发现了一段未发送的求救信号。",
-      "mediaType": "video",
-      "mediaSrc": "https://www.runoob.com/try/demo_source/mov_bbb.mp4",
-      "audioSrc": "",
-      "poster": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=800&q=80",
-      "options": []
-    },
-    "n3": {
-      "id": "n3",
-      "title": "黑暗走廊",
-      "type": "scene",
-      "content": "舱门在火花中滑开。走廊一片漆黑，远处的应急灯忽明忽暗，仿佛有什么东西在阴影中移动。",
-      "mediaType": "video",
-      "mediaSrc": "https://www.runoob.com/try/demo_source/mov_bbb.mp4",
-      "audioSrc": "",
-      "poster": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=800&q=80",
-      "options": []
     }
   },
   "meta": {
     "name": "雨夜霓虹：赛博科幻影集",
-    "desc": "这份影集为您精选了充满氛围感的赛博朋克故事。从雨夜中的霓虹侦探到深空母舰上的冷冽苏醒，这些充满悬疑与未来感的内容非常适合在雨天静心品味。"
+    "desc": "这份影集为您精选了充满氛围感的赛博朋克故事。"
   },
   "viewport": {
     "x": 0,
