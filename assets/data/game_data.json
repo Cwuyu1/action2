@@ -1,15 +1,174 @@
 {
   "nodes": {
+    "story-start": {
+      "id": "story-start",
+      "title": "序章：任务简报",
+      "type": "decision",
+      "content": "你收到了来自总部的紧急任务。目标位于重兵把守的赛博要塞。你需要决定行动方案。",
+      "mediaType": "video",
+      "mediaSrc": "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+      "audioSrc": "",
+      "poster": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=800&q=80",
+      "options": [
+        {
+          "id": "c1",
+          "label": "正面突入 (Assault)",
+          "targetId": "story-assault"
+        },
+        {
+          "id": "c2",
+          "label": "潜行渗透 (Stealth)",
+          "targetId": "story-stealth"
+        }
+      ]
+    },
+    "story-assault": {
+      "id": "story-assault",
+      "title": "分支 A：正面交锋",
+      "type": "scene",
+      "content": "你选择了火力全开。警报声大作，这是一场硬仗。",
+      "mediaType": "video",
+      "mediaSrc": "https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+      "audioSrc": "",
+      "poster": "https://images.unsplash.com/photo-1595759795033-d96fb546dc75?w=800&q=80",
+      "options": []
+    },
+    "story-stealth": {
+      "id": "story-stealth",
+      "title": "分支 B：暗影潜行",
+      "type": "decision",
+      "content": "你避开了正门守卫，来到了服务器机房的外围。",
+      "mediaType": "video",
+      "mediaSrc": "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      "audioSrc": "",
+      "poster": "https://images.unsplash.com/photo-1504685723432-f3f08b6862cc?w=800&q=80",
+      "options": [
+        {
+          "id": "c3",
+          "label": "骇入终端 (Hack)",
+          "targetId": "story-hack"
+        },
+        {
+          "id": "c4",
+          "label": "爬通风管道 (Vent)",
+          "targetId": "story-vent"
+        }
+      ]
+    },
+    "story-hack": {
+      "id": "story-hack",
+      "title": "结局：数据主宰",
+      "type": "scene",
+      "content": "你成功获取了最高权限，控制了整个要塞。任务完美完成。",
+      "mediaType": "video",
+      "mediaSrc": "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+      "audioSrc": "",
+      "poster": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=800&q=80",
+      "options": []
+    },
+    "story-vent": {
+      "id": "story-vent",
+      "title": "结局：意外遭遇",
+      "type": "scene",
+      "content": "通风管道里竟然布满了激光陷阱... 任务失败。",
+      "mediaType": "video",
+      "mediaSrc": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+      "audioSrc": "",
+      "poster": "https://images.unsplash.com/photo-1455885661740-29cba08a8259?w=800&q=80",
+      "options": []
+    },
+    "det-start": {
+      "id": "det-start",
+      "title": "霓虹侦探：雨夜",
+      "type": "decision",
+      "content": "一名仿生人倒在后巷。作为私家侦探，你发现了两个可疑之处：地上的芯片和逃跑的人影。",
+      "mediaType": "video",
+      "mediaSrc": "https://storage.googleapis.com/gtv-videos-bucket/sample/TearsOfSteel.mp4",
+      "audioSrc": "",
+      "poster": "https://images.unsplash.com/photo-1555680202-c86f0e12f086?w=800&q=80",
+      "options": [
+        {
+          "id": "d1",
+          "label": "拾取芯片分析 (Analyze)",
+          "targetId": "det-analyze"
+        },
+        {
+          "id": "d2",
+          "label": "追击嫌疑人 (Chase)",
+          "targetId": "det-chase"
+        }
+      ]
+    },
+    "det-chase": {
+      "id": "det-chase",
+      "title": "分支：极速追捕",
+      "type": "decision",
+      "content": "嫌疑人驾驶浮空车逃窜。你在霓虹森林中展开了生死时速。",
+      "mediaType": "video",
+      "mediaSrc": "https://storage.googleapis.com/gtv-videos-bucket/sample/VolkswagenGTIReview.mp4",
+      "audioSrc": "",
+      "poster": "https://images.unsplash.com/photo-1568605117036-5fe5e7bab0b7?w=800&q=80",
+      "options": [
+        {
+          "id": "d3",
+          "label": "撞击截停 (Ram)",
+          "targetId": "det-crash"
+        },
+        {
+          "id": "d4",
+          "label": "远程骇入车辆 (Hack)",
+          "targetId": "det-truth"
+        }
+      ]
+    },
+    "det-analyze": {
+      "id": "det-analyze",
+      "title": "分支：记忆碎片",
+      "type": "decision",
+      "content": "芯片里存储着一段破碎的记忆，似乎指向了该市最大的巨型企业...",
+      "mediaType": "video",
+      "mediaSrc": "https://storage.googleapis.com/gtv-videos-bucket/sample/Sintel.mp4",
+      "audioSrc": "",
+      "poster": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=800&q=80",
+      "options": [
+        {
+          "id": "d5",
+          "label": "揭露企业阴谋",
+          "targetId": "det-truth"
+        }
+      ]
+    },
+    "det-crash": {
+      "id": "det-crash",
+      "title": "结局：车毁人亡",
+      "type": "scene",
+      "content": "激烈的碰撞导致嫌疑人车辆爆炸。线索断了，你也因违规执法被吊销执照。",
+      "mediaType": "video",
+      "mediaSrc": "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+      "audioSrc": "",
+      "poster": "https://images.unsplash.com/photo-1599256872237-5dcc0fbe9668?w=800&q=80",
+      "options": []
+    },
+    "det-truth": {
+      "id": "det-truth",
+      "title": "真结局：赛博之心的陨落",
+      "type": "scene",
+      "content": "你发现了仿生人觉醒的秘密，并公之于众。整个城市因你而改变。",
+      "mediaType": "video",
+      "mediaSrc": "https://storage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+      "audioSrc": "",
+      "poster": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800&q=80",
+      "options": []
+    },
     "start": {
       "id": "start",
       "title": "序章：苏醒",
-      "type": "scene",
+      "type": "decision",
       "content": "你在一个冷冻舱中醒来。警报声在耳边回荡，空气中弥漫着臭氧和铁锈的味道。控制台闪烁着微弱的红光，你什么都想不起来。",
-      "mediaType": "none",
+      "mediaType": "video",
       "mediaSrc": "https://www.runoob.com/try/demo_source/mov_bbb.mp4",
       "audioSrc": "",
-      "x": 100,
-      "y": 300,
+      "poster": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=800&q=80",
       "options": [
         {
           "id": "o1",
@@ -26,13 +185,12 @@
     "n2": {
       "id": "n2",
       "title": "系统日志",
-      "type": "decision",
+      "type": "scene",
       "content": "控制台屏幕闪烁不定。上面显示着 '致命错误：船体破损'。你发现了一段未发送的求救信号。",
-      "mediaType": "none",
+      "mediaType": "video",
       "mediaSrc": "https://www.runoob.com/try/demo_source/mov_bbb.mp4",
       "audioSrc": "",
-      "x": 500,
-      "y": 200,
+      "poster": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=800&q=80",
       "options": []
     },
     "n3": {
@@ -40,15 +198,17 @@
       "title": "黑暗走廊",
       "type": "scene",
       "content": "舱门在火花中滑开。走廊一片漆黑，远处的应急灯忽明忽暗，仿佛有什么东西在阴影中移动。",
-      "mediaType": "none",
+      "mediaType": "video",
       "mediaSrc": "https://www.runoob.com/try/demo_source/mov_bbb.mp4",
       "audioSrc": "",
-      "x": 500,
-      "y": 400,
+      "poster": "https://images.unsplash.com/photo-1535905557558-afc4877a26fc?w=800&q=80",
       "options": []
     }
   },
-  "characters": {},
+  "meta": {
+    "name": "雨夜霓虹：赛博科幻影集",
+    "desc": "这份影集为您精选了充满氛围感的赛博朋克故事。从雨夜中的霓虹侦探到深空母舰上的冷冽苏醒，这些充满悬疑与未来感的内容非常适合在雨天静心品味。"
+  },
   "viewport": {
     "x": 0,
     "y": 0,
