@@ -166,7 +166,7 @@ class _InteractiveMoviePageState extends State<InteractiveMoviePage> {
 
       // 1. 从 assets 文件夹读取文件
       // 这里的路径必须和 pubspec.yaml 里写的一模一样
-      final String jsonString = await rootBundle.loadString('./assets/data/game_data.json');
+      final String jsonString = await rootBundle.loadString('assets/data/game_data.json');
       
       // 2. 解析 JSON
       final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
@@ -186,7 +186,7 @@ class _InteractiveMoviePageState extends State<InteractiveMoviePage> {
         _initializeVideo(_currentNode!.mediaSrc);
       }
     } catch (e) {
-      debugPrint("Error loading JSON file: $e");
+      debugPrint("用户JSON读取失败: $e");
       // 这里可以加一个弹窗提示用户读取失败
     }
   }
