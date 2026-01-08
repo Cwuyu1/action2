@@ -1,0 +1,92 @@
+name: Build Flutter App
+on:
+  push:
+    branches: [ "main" ] # 当推送到 main 分支时触发
+  workflow_dispatch:      # 允许你在 GitHub 网页上手动点击按钮触发
+
+jobs:
+  # --- 1. Android 打包 (Ubuntu 环境) ---
+  build_android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      
+      - name: Get Dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
+        
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: android-release
+          path: build/app/outputs/flutter-apk/app-release.apk
+
+  # --- 2. Windows 打包 (Windows 环境) ---
+  build_windows:
+    name: Build Windows EXE
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+      
+      - name: Enable Desktop
+        run: flutter config --enable-windows-desktop
+
+      - name: Get Dependencies
+        run: flutter pub get
+
+      - name: Build Windows
+        run: flutter build windows --release
+
+      # Windows 构建出来是一个文件夹，我们需要把它压缩成 zip 方便下载
+      - name: Compress Release
+        run: Compress-Archive -Path build\windows\x64\runner\Release\* -DestinationPath windows-release.zip
+
+      - name: Upload Windows Zip
+        uses: actions/upload-artifact@v4
+        with:
+          name: windows-release
+          path: windows-release.zip
+
+  # --- 3. iOS 打包 (macOS 环境 - ⚠️最难的部分) ---
+  build_ios:
+    name: Build iOS IPA
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: 'stable'
+          cache: true
+
+      - name: Get Dependencies
+        run: flutter pub get
+
+      # ⚠️ 注意：iOS 必须有证书才能打包 IPA。
+      # 如果没有配置证书，普通的 build ipa 会失败。
+      # 这里为了让你能先跑通，我们使用 "无签名构建" (只能用于测试编译，无法安装到手机)
+      # 如果你需要能安装的 IPA，必须在 Secrets 里配置证书 (详见下文解释)
+      - name: Build iOS (No Codesign)
+        run: flutter build ios --release --no-codesign
+
+      - name: Make Payload
+        run: |
+          mkdir Payload
+          mv build/ios/iphoneos/Runner.app Payload/
+          zip -r release.ipa Payload
+
+      - name: Upload IPA
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-release
+          path: release.ipa
