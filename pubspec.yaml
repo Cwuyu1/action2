@@ -13,7 +13,7 @@ dependencies:
   # Media kit for cross-platform video playback (supports Windows, Linux, macOS, Android, iOS, Web)
   media_kit: ^1.1.10
   media_kit_video: ^1.2.4
-  media_kit_libs_windows_video: ^1.0.9  # Windows support
+  media_kit_libs_video: ^1.0.4
   
 dev_dependencies:
   flutter_test:
