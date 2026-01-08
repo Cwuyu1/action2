@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:media_kit/media_kit.dart';
 import 'package:media_kit_video/media_kit_video.dart';
+import 'package:flutter/services.dart' show rootBundle;
 
 // --- 1. 数据模型定义 (根据你的JSON设计) ---
 
@@ -88,52 +89,7 @@ class GameViewport {
 
 // --- 2. 模拟输入的 JSON 数据 ---
 // 在实际开发中，你可以通过 rootBundle.loadString 读取文件
-const String rawJson = '''
-{
-  "nodes": {
-    "start": {
-      "id": "start",
-      "title": "序章：苏醒",
-      "type": "scene",
-      "content": "你在一个冷冻舱中醒来。警报声在耳边回荡，空气中弥漫着臭氧和铁锈的味道。控制台闪烁着微弱的红光，你什么都想不起来。",
-      "mediaType": "none",
-      "mediaSrc": "https://www.runoob.com/try/demo_source/mov_bbb.mp4",
-      "audioSrc": "",
-      "x": 100,
-      "y": 300,
-      "options": [
-        { "id": "o1", "label": "检查控制台", "targetId": "n2" },
-        { "id": "o2", "label": "强行打开舱门", "targetId": "n3" }
-      ]
-    },
-    "n2": {
-      "id": "n2",
-      "title": "系统日志",
-      "type": "decision",
-      "content": "控制台屏幕闪烁不定。上面显示着 '致命错误：船体破损'。你发现了一段未发送的求救信号。",
-      "mediaType": "none",
-      "mediaSrc": "https://www.runoob.com/try/demo_source/mov_bbb.mp4",
-      "audioSrc": "",
-      "x": 500,
-      "y": 200,
-      "options": []
-    },
-    "n3": {
-      "id": "n3",
-      "title": "黑暗走廊",
-      "type": "scene",
-      "content": "舱门在火花中滑开。走廊一片漆黑，远处的应急灯忽明忽暗，仿佛有什么东西在阴影中移动。",
-      "mediaType": "none",
-      "mediaSrc": "https://www.runoob.com/try/demo_source/mov_bbb.mp4",
-      "audioSrc": "",
-      "x": 500,
-      "y": 400,
-      "options": []
-    }
-  },
-  "viewport": { "x": 0, "y": 0, "zoom": 1 }
-}
-''';
+
 
 // --- 3. 应用程序主入口 ---
 
@@ -204,22 +160,34 @@ class _InteractiveMoviePageState extends State<InteractiveMoviePage> {
   }
 
   // 加载并解析 JSON
-  void _loadGame() {
+  // 修改后的加载方法
+  Future<void> _loadGame() async {
     try {
-      final Map<String, dynamic> jsonMap = jsonDecode(rawJson);
+
+      // 1. 从 assets 文件夹读取文件
+      // 这里的路径必须和 pubspec.yaml 里写的一模一样
+      final String jsonString = await rootBundle.loadString('./assets/data/game_data.json');
+      
+      // 2. 解析 JSON
+      final Map<String, dynamic> jsonMap = jsonDecode(jsonString);
       final gameData = GameData.fromJson(jsonMap);
       
+      if (!mounted) return; // 防止异步回来页面已经销毁
+
       setState(() {
         _gameData = gameData;
         // 默认从 ID 为 "start" 的节点开始
-        _currentNode = gameData.nodes['start'];
+        if (_gameData!.nodes.containsKey('start')) {
+             _currentNode = _gameData!.nodes['start'];
+        }
       });
       
       if (_currentNode != null) {
         _initializeVideo(_currentNode!.mediaSrc);
       }
     } catch (e) {
-      debugPrint("Error loading JSON: $e");
+      debugPrint("Error loading JSON file: $e");
+      // 这里可以加一个弹窗提示用户读取失败
     }
   }
 
